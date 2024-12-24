@@ -1,0 +1,11 @@
+@use "../variable" as *;
+
+@mixin background($filename, $coordinate: null, $bgcolor: null, $bgsize: contain) {
+  background: url(#{$imgurl}#{$filename}) no-repeat $coordinate $bgcolor;
+  background-size: $bgsize;
+}
+
+// Example usage of the background mixin
+// .example {
+//   @include background('example-image.png', center, #fff, cover);
+// }

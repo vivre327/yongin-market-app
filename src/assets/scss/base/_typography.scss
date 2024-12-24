@@ -1,0 +1,67 @@
+@use "../abstracts/" as *;
+
+/*----------------------
+ Pretendard Font
+----------------------*/
+@font-face {
+  font-family: "Pretendard";
+  src: url("../fonts/Pretendard-ExtraLight.woff2") format("woff2"), url("../fonts/Pretendard-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../fonts/Pretendard-Regular.woff2") format("woff2"), url("../fonts/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../fonts/Pretendard-Medium.woff2") format("woff2"), url("../fonts/Pretendard-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../fonts/Pretendard-Bold.woff2") format("woff2"), url("../fonts/Pretendard-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer Typography {
+  html {
+    font-size: 100%; /* 16px 기준 */
+  }
+
+  body {
+    font-size: 1rem;
+    font-family: "Pretendard", sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: rem(8);
+
+    h2 {
+      color: var(--color-gray-900);
+    }
+
+    + .subtitle {
+      margin-top: rem(2);
+      color: var(--color-gray-500);
+      @include typography("body", "01-m");
+    }
+  }
+}

@@ -1,0 +1,801 @@
+@use "../abstracts/" as *;
+
+/*----------------------
+  Input
+----------------------*/
+input {
+  [type="checkbox"],
+  [type="radio"] {
+    padding: 0;
+  }
+}
+
+input,
+select,
+textarea {
+  /* 기본 아웃라인 제거 */
+  outline: none;
+
+  /* iOS의 기본 스타일 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* 클릭시 사파리 하이라이트 제거 */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Chrome, Safari, Edge */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s !important; /* 배경색 덮어쓰기 방지 */
+}
+
+/* Firefox */
+input:-moz-autofill,
+textarea:-moz-autofill,
+select:-moz-autofill {
+  background-color: #fff !important; /* 배경색 덮어쓰기 */
+}
+/*----------------------
+  Form Element
+----------------------*/
+.form-element {
+  position: relative;
+  min-width: 0;
+
+  &__label {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    display: inline-block;
+    margin-bottom: rem(4);
+    color: var(--color-gray-500);
+    @include typography("label", "01-b");
+  }
+
+  &__control {
+    clear: left;
+    position: relative;
+
+    .checkbox,
+    .radio {
+      display: block;
+    }
+  }
+
+  &__legend {
+    font-weight: 700;
+  }
+}
+
+// Validation text
+.form-feedback {
+  margin-top: 6px;
+  display: block;
+  @include typography("caption", "01-m");
+}
+
+/*----------------------
+  Text Input
+----------------------*/
+.input {
+  display: inline-block;
+  width: 100%;
+  min-height: calc(rem(46) + 2px);
+  padding-block: 0;
+  padding-inline: rem(10);
+  color: var(--color-gray-900);
+  @include typography("body", "02-m");
+  line-height: rem(48);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius-3);
+  background-color: var(--color-white);
+  -webkit-transition: border 0.1s linear, background-color 0.1s linear;
+  transition: border 0.1s linear, background-color 0.1s linear;
+
+  &:focus {
+    border-color: 1px solid var(--color-gray-900);
+  }
+
+  &:focus-visible(:not([readonly])) {
+    border-color: 1px solid var(--color-gray-900);
+  }
+
+  // Disabled Style
+  &[disabled] {
+    background-color: var(--color-gray-03);
+    border-color: var(--color-gray-03);
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &[readonly] {
+    color: var(--color-text-01);
+    // border: 1px solid transparent;
+    background-color: var(--color-white);
+    outline: 0;
+
+    &:focus {
+      border-color: transparent;
+      outline: none;
+    }
+  }
+
+  /*----------------------
+    Datetime Picker
+  ----------------------*/
+  &_date {
+    font-weight: 500;
+    color: var(--color-text-01);
+  }
+}
+
+::placeholder {
+  color: var(--color-gray-300);
+  font-weight: 500;
+  opacity: 1;
+}
+
+::-webkit-input-placeholder {
+  color: var(--color-gray-300);
+  font-weight: 500;
+  opacity: 1;
+}
+
+// Text Input With Icon
+.input-has-icon {
+  position: relative;
+
+  .btn-icon:not(button) {
+    pointer-events: none;
+  }
+
+  // Text Input With Icon
+  .btn-icon {
+    // 24px
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 1;
+    border: 0;
+    z-index: 1;
+  }
+
+  .btn-icon {
+    right: rem(16);
+  }
+
+  .input {
+    height: 48px;
+    padding-right: 3rem;
+  }
+
+  .search {
+    width: 3.125rem;
+    height: 100%;
+    color: var(--color-white);
+    border-radius: var(--radius-2);
+    background-color: var(--color-gray-05);
+    right: 0;
+    transition: 0.1s ease;
+
+    &:hover,
+    &:focus {
+      color: var(--color-blue-06);
+    }
+
+    .btn-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  // Text Input With Icon :foucs
+  .input {
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+
+  .input-search {
+    padding-right: rem(96);
+  }
+
+  .clear {
+    right: rem(56);
+  }
+}
+
+/*----------------------
+  수업일지 Textarea
+----------------------*/
+.modal-body textarea.input {
+  resize: none;
+  min-height: 115px;
+  padding: 8px 10px;
+  @include typography("body", "01-m");
+
+  /* Scrollbar Cursor */
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-track {
+    cursor: default;
+  }
+
+  /* Scrollbar Sizing */
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: var(--color-gray-03);
+
+    &:hover {
+      background: var(--color-gray-04);
+    }
+  }
+
+  /* Scrollbar Track Spacing */
+  &::-webkit-scrollbar-track {
+    margin: 6px 0;
+  }
+}
+
+/*----------------------
+  Checkbox
+----------------------*/
+.checkbox {
+  display: inline-block;
+  position: relative;
+
+  // Checkbox Button
+  &_button {
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+
+    .checkbox_faux {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    [type="checkbox"]:focus-visible ~ .checkbox_button__label {
+      border: 1px solid var(--color-blue-06);
+    }
+
+    [type="checkbox"] {
+      width: 1px;
+      height: 1px;
+      border: 0;
+      clip: rect(0 0 0 0);
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+
+      &[disabled] {
+        & + .checkbox_button__label {
+          cursor: default;
+        }
+      }
+    }
+
+    // Checkbox Button label
+    &__label {
+      padding: 0.5rem 1rem;
+      font-size: 15px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: var(--color-gray-50);
+      background-color: var(--color-gray-50);
+      border-radius: 0.375rem;
+      cursor: pointer;
+
+      &:focus-visible {
+      }
+    }
+
+    [type="checkbox"]:checked + .checkbox_button__label,
+    [type="checkbox"]:checked + .checkbox_faux,
+    [type="checkbox"]:checked ~ .checkbox_faux {
+      background-color: var(--color-green-500);
+      color: var(--color-white);
+    }
+  }
+
+  [type="checkbox"] {
+    width: 1px;
+    height: 1px;
+    border: 0;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    pointer-events: auto;
+  }
+
+  .checkbox__label,
+  .form-element__label {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 18px;
+    // gap: 0.5rem;
+  }
+  .form-element__label {
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+
+  // checkbox icon
+  .checkbox_faux {
+    width: rem(20);
+    height: rem(20);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    vertical-align: middle;
+    border-radius: rem(6);
+    background-color: var(--color-gray-50);
+    -webkit-transition: border 0.1s linear, background-color 0.1s linear;
+    transition: border 0.1s linear, background-color 0.1s linear;
+
+    .icon {
+      display: none;
+      width: 0.75rem;
+      height: 0.625rem;
+      transition: 0.1s linear;
+    }
+  }
+
+  // Checkbox Label
+  .form-element__label {
+    color: var(--color-gray-500);
+    @include typography("body", "02-m");
+    line-height: 25px;
+  }
+
+  // Checked Style
+  [type="checkbox"]:checked + .checkbox__label .checkbox_faux,
+  [type="checkbox"]:checked + .checkbox_faux,
+  [type="checkbox"]:checked ~ .checkbox_faux {
+    color: var(--color-white);
+    background-color: var(--color-green-500);
+
+    .icon {
+      display: block;
+    }
+  }
+
+  // Sizing
+  &.sm {
+    .checkbox_faux {
+      width: 18px;
+      height: 18px;
+    }
+    .form-element__label {
+      color: var(--color-text-05-disabled);
+      @include typography("title", "01-m");
+      line-height: 22px;
+    }
+  }
+}
+
+.checkbox [type="checkbox"]:checked + .checkbox__label .form-element__label,
+.checkbox [type="checkbox"]:checked ~ .checkbox__label .form-element__label {
+  color: var(--color-gray-900); /* 체크박스 선택 시 텍스트 색상 변경 */
+}
+
+.checkbox_button [type="checkbox"]:focus-visible + .checkbox_button,
+.checkbox_button [type="checkbox"]:focus-visible + .checkbox_faux,
+.checkbox_button [type="checkbox"]:focus-visible ~ .checkbox_faux {
+  z-index: 1;
+}
+
+// Checkbox Focus Style
+.checkbox [type="checkbox"]:focus-visible + .checkbox__label .checkbox_faux,
+.checkbox [type="checkbox"]:focus-visible + .checkbox_faux,
+.checkbox [type="checkbox"]:focus-visible ~ .checkbox_faux {
+  outline: 0;
+  outline-offset: 0;
+}
+
+.form-element .checkbox [type="checkbox"] + .checkbox__label .checkbox_faux,
+.form-element .checkbox [type="checkbox"] + .checkbox_faux,
+.form-element .checkbox [type="checkbox"] ~ .checkbox_faux {
+  margin-right: 0.5rem;
+}
+
+/*----------------------
+  Radio
+----------------------*/
+.radio {
+  display: inline-block;
+  position: relative;
+
+  [type="radio"] {
+    width: 1px;
+    height: 1px;
+    border: 0;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    pointer-events: auto;
+  }
+
+  .radio__label,
+  .form-element__label {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 18px;
+  }
+
+  .form-element__label {
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+
+  // radio icon
+  .radio_faux {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+    vertical-align: middle;
+    border-radius: 50%; // 체크박스와 다른 부분
+    border: 1px solid var(--color-gray-05);
+    background-color: transparent;
+    transition: border 0.1s linear, background-color 0.1s linear;
+
+    .radio_circle {
+      // check 아이콘 대신 원형 사용
+      display: none;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      background-color: var(--color-blue-06);
+      transition: 0.1s linear;
+    }
+  }
+
+  // Radio Label
+  .form-element__label {
+    color: var(--color-text-04);
+    @include typography("title", "02-m");
+    line-height: 25px;
+  }
+
+  // Checked Style
+  [type="radio"]:checked + .radio__label .radio_faux,
+  [type="radio"]:checked + .radio_faux,
+  [type="radio"]:checked ~ .radio_faux {
+    color: var(--color-white);
+    border-color: var(--color-blue-06);
+    background-color: transparent;
+
+    .radio_circle {
+      display: block;
+    }
+  }
+
+  // Sizing
+  &.sm {
+    .radio_faux {
+      width: 18px;
+      height: 18px;
+
+      .radio_circle {
+        width: 8px;
+        height: 8px;
+      }
+    }
+    .form-element__label {
+      color: var(--color-text-05-disabled);
+      @include typography("title", "01-m");
+      line-height: 22px;
+    }
+  }
+
+  // Radio Button
+  &_button {
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+
+    .radio_faux {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    [type="radio"] {
+      width: 1px;
+      height: 1px;
+      border: 0;
+      clip: rect(0 0 0 0);
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+
+      &[disabled] {
+        & + .radio_button__label {
+          cursor: default;
+        }
+      }
+    }
+
+    // Radio Button label
+    &__label {
+      width: 78px;
+      height: 40px;
+      background-color: var(--color-white);
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+
+      &:focus-visible {
+      }
+    }
+
+    [type="radio"]:checked + .radio_button__label {
+      border: 2px solid var(--color-blue-06);
+      position: relative;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        // background-image: url("@/assets/images/icons/radio_checked.svg");
+      }
+    }
+  }
+}
+
+.radio [type="radio"]:checked + .radio__label .form-element__label,
+.radio [type="radio"]:checked ~ .radio__label .form-element__label {
+  color: var(--color-text-01);
+}
+
+// Radio Focus Style
+.radio [type="radio"]:focus-visible + .radio__label .radio_faux,
+.radio [type="radio"]:focus-visible + .radio_faux,
+.radio [type="radio"]:focus-visible ~ .radio_faux {
+  outline: 0;
+  outline-offset: 0;
+}
+
+.form-element .radio [type="radio"] + .radio__label .radio_faux,
+.form-element .radio [type="radio"] + .radio_faux,
+.form-element .radio [type="radio"] ~ .radio_faux {
+  margin-right: 0.5rem;
+}
+
+.form-element__label.draw {
+  margin-bottom: 4px;
+  color: var(--color-text-01);
+  @include typography("body", "02-m");
+}
+
+.radio_button [type="radio"]:focus-visible + .radio_button__label,
+.radio_button [type="radio"]:focus-visible + .radio_faux,
+.radio_button [type="radio"]:focus-visible ~ .radio_faux {
+  z-index: 1;
+}
+
+/*----------------------
+  Select
+----------------------*/
+// Select Container
+.select-wrap {
+  .btn-icon {
+    position: absolute;
+    top: 50%;
+    right: rem(16);
+    transform: translateY(-50%);
+    line-height: 1;
+    border: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+// select trigger
+.select {
+  width: 100%;
+  height: rem(48);
+  padding-inline: rem(16);
+  padding-right: rem(56);
+  border-radius: var(--radius-3);
+  border: 1px solid var(--color-gray-100);
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  text-align: left;
+  @include typography("body", "02-m");
+  line-height: rem(48);
+  @include ellipsis(1);
+}
+
+/* Custom SelectBox Option */
+.select-list {
+}
+.select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(16);
+  padding: rem(20) rem(16);
+  text-align: left;
+  color: var(--color-gray-500);
+  @include typography("body", "02-m");
+
+  &.is-selected {
+    color: var(--color-gray-900);
+    font-weight: var(--font-body-02-b-weight);
+  }
+
+  .icon {
+    width: rem(24);
+    height: rem(24);
+    color: var(--color-green-500);
+  }
+}
+
+/*----------------------
+  Validation Error
+----------------------*/
+.is-error {
+  border-color: var(--color-status-red);
+
+  .form-element__control {
+    display: flex;
+  }
+  // Text Input Error
+  .input {
+    border-color: var(--color-status-red);
+
+    &:focus {
+      outline: 0;
+    }
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+
+  // Checkbox Buttons
+  .checkbox_button__label {
+    // background-color: var(--color-white) !important;
+    border: 1px solid var(--color-red) !important;
+
+    &.underline {
+      color: var(--color-red) !important;
+      border: 0 !important;
+    }
+  }
+
+  // Radio Buttons
+  .radio_button__label {
+    background-color: var(--color-white) !important;
+    border-color: var(--color-red) !important;
+  }
+
+  // error msg
+  .form-feedback,
+  .required {
+    color: var(--color-status-red) !important;
+  }
+
+  // select
+  .select,
+  .select:active,
+  .select:focus {
+  }
+}
+
+/*----------------------
+  Required
+----------------------*/
+.required {
+  margin: 0 2px;
+  color: var(--color-red);
+  text-decoration: none;
+}
+
+/*----------------------
+  Checkbox Toggle
+----------------------*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: rem(48);
+  height: rem(28);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-gray-100);
+  transition: 0.4s;
+  border-radius: var(--radius-pill);
+}
+
+.slider:before {
+  content: "";
+  width: rem(20);
+  height: rem(20);
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  left: rem(4);
+  bottom: rem(4);
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--color-green-500);
+}
+
+input:checked + .slider:before {
+  transform: translateX(rem(20));
+}
+
+.form-element__control .checkbox {
+  &.left_label {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+
+    .form-element__label {
+      color: var(--color-text-03);
+      @include typography("title", "02-b");
+    }
+  }
+}

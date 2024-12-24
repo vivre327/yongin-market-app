@@ -1,0 +1,62 @@
+@use "../abstracts/" as *;
+
+@layer Components.Icon {
+  /*----------------------
+    Icon
+  ----------------------*/
+  .icon-container {
+    display: inline-block;
+    line-height: 1;
+  }
+
+  // 아이콘 기본 스타일
+  .icon {
+    width: rem(24);
+    height: rem(24);
+    color: currentColor;
+
+    // 아이콘 기본 색상 클래스
+    &-default {
+      color: var(--color-gray-900);
+    }
+
+    // 아이콘 사이즈 클래스
+    &.x-sm {
+      width: rem(16);
+      height: rem(16);
+    }
+    &.sm {
+      width: rem(20);
+      height: rem(20);
+    }
+    &.md {
+      width: rem(24);
+      height: rem(24);
+    }
+    &.lg {
+      width: rem(32);
+      height: rem(32);
+    }
+    &.x-lg {
+      width: rem(40);
+      height: rem(40);
+    }
+
+    // With Icon
+    &_left {
+      margin-right: rem(4);
+    }
+    &_right {
+      margin-left: rem(4);
+    }
+  }
+
+  //부모 요소의 색상을 아이콘 색상으로 사용
+  .current-color .icon {
+    color: currentColor; // SCSS 변수 사용
+  }
+
+  svg:not(:root) {
+    overflow: hidden; // SVG의 영역을 넘어서는 콘텐츠를 숨김
+  }
+}

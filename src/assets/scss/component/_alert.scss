@@ -1,0 +1,54 @@
+@use "../abstracts/" as *;
+@use "../layout/align" as *;
+
+@layer Components.Alert {
+  .alert {
+    container-type: inline-size;
+    container-name: alert-container;
+
+    &-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: rem(6);
+      height: rem(48);
+      padding-inline: rem(14) rem(10);
+      background-color: var(--color-orange-50);
+      border-radius: var(--radius-pill);
+
+      @container alert-container (width < 316px) {
+        gap: 0;
+        padding-inline: rem(10) rem(6);
+      }
+    }
+
+    &-content {
+      display: flex;
+      align-items: center;
+      gap: rem(6);
+
+      span {
+        @include typography("caption", "02-b");
+        @include ellipsis;
+
+        @container alert-container (width < 316px) {
+          font-size: rem(12);
+        }
+      }
+    }
+
+    .btn-icon {
+      color: var(--color-gray-400);
+
+      @container alert-container (width < 316px) {
+        width: rem(20);
+      }
+    }
+
+    .icon {
+      @container alert-container (width < 316px) {
+        width: rem(20);
+      }
+    }
+  }
+}

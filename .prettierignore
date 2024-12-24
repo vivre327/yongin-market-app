@@ -1,0 +1,16 @@
+# 의존성
+node_modules
+package-lock.json
+
+# 빌드 결과물
+build
+dist
+coverage
+
+# 자동 생성 파일
+*.min.js
+*.min.css
+
+# 기타
+.git
+.vscode

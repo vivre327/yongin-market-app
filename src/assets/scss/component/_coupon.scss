@@ -1,0 +1,236 @@
+@use "../abstracts" as *;
+@use "sass:map";
+
+$color-variants: (
+  "primary": (
+    border: var(--color-green-100),
+    bg: var(--color-green-50),
+    title: var(--color-green-900),
+    icon: var(--color-green-600),
+  ),
+  "tertiary": (
+    border: var(--color-orange-100),
+    bg: var(--color-orange-50),
+    title: var(--color-orange-900),
+    icon: var(--color-orange-600),
+  ),
+  "secondary": (
+    border: var(--color-blue-100),
+    bg: var(--color-blue-50),
+    title: var(--color-blue-900),
+    icon: var(--color-blue-600),
+  ),
+);
+
+@mixin coupon-color-variant($variant) {
+  $border-color: map.get(map.get($color-variants, $variant), "border");
+  $bg-color: map.get(map.get($color-variants, $variant), "bg");
+  $title-color: map.get(map.get($color-variants, $variant), "title");
+  $icon-color: map.get(map.get($color-variants, $variant), "icon");
+
+  color: $bg-color;
+
+  .coupon-left {
+    border: 1px solid $border-color;
+    background-color: currentColor;
+
+    &::before {
+      border-color: $border-color;
+    }
+
+    &::after {
+      border-color: $border-color;
+    }
+  }
+
+  .coupon-title {
+    color: $title-color;
+  }
+
+  .coupon-right {
+    border: 1px solid $border-color;
+    background-color: currentColor;
+  }
+
+  .icon {
+    color: $icon-color;
+  }
+
+  .coupon-action .icon {
+    color: var(--color-gray-600);
+  }
+}
+
+.coupon {
+  display: flex;
+  min-width: vw(208);
+  width: 100%;
+  // aspect-ratio: 208 / 96;
+  min-height: rem(96);
+  height: auto;
+  max-height: rem(110);
+  container-type: inline-size;
+  container-name: coupon;
+
+  @container coupon (min-width: 240px) {
+    .coupon-left {
+      justify-content: space-around;
+    }
+  }
+
+  &-left {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: rem(12);
+    border-radius: var(--radius-2);
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      width: rem(2);
+      height: calc(100% - rem(12));
+      border: 1px solid;
+      border-left: 0;
+      border-right: 0;
+      background-color: currentColor;
+      position: absolute;
+      right: rem(-2);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: rem(2);
+      height: calc(100% - rem(20));
+      border-left: 1px dashed;
+      position: absolute;
+      right: rem(-2);
+      top: 50%;
+      transform: translate(50%, -50%);
+    }
+  }
+
+  &-title {
+    // max-width: rem(128);
+    @include typography("body", "01-b");
+    @include ellipsis(2);
+  }
+
+  &-period {
+    // white-space: nowrap;
+    color: var(--color-gray-500);
+    @include typography("caption", "01-m");
+    // @include ellipsis(1);
+  }
+
+  &-details {
+    color: var(--color-gray-500);
+    @include typography("caption", "01-m");
+  }
+
+  &-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27%;
+    padding: rem(12);
+    border-radius: var(--radius-2);
+
+    .icon {
+      width: rem(32);
+      height: rem(32);
+    }
+  }
+
+  &-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: rem(2);
+    padding: rem(12);
+
+    span {
+      color: var(--color-gray-500);
+      @include typography("label", "01-m");
+    }
+  }
+
+  // 사이즈 클래스
+  &.lg {
+    height: rem(144);
+
+    .coupon-left {
+      padding: rem(10) rem(24);
+      border-radius: var(--radius-3);
+      position: relative;
+
+      &::before {
+        height: calc(100% - rem(18));
+      }
+
+      &::after {
+        height: calc(100% - rem(24));
+      }
+    }
+
+    .coupon-right {
+      width: auto;
+      padding: rem(10) rem(6);
+      border-radius: var(--radius-3);
+
+      .icon {
+        width: rem(24);
+        height: rem(24);
+      }
+    }
+
+    .coupon-title {
+      max-width: rem(156);
+      margin-bottom: rem(10);
+      margin-right: rem(28);
+      @include typography("title", "01-b");
+    }
+
+    .coupon-details {
+      max-width: rem(156);
+      font-size: rem(13);
+      font-weight: 500;
+      line-height: 19.5px;
+      letter-spacing: -0.003em;
+      text-align: left;
+    }
+  }
+
+  &.primary {
+    @include coupon-color-variant("primary");
+  }
+
+  &.tertiary {
+    @include coupon-color-variant("tertiary");
+  }
+
+  &.secondary {
+    @include coupon-color-variant("secondary");
+  }
+}
+
+// 쿠폰 태그
+.coupon-tag {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: rem(56);
+  aspect-ratio: 1 / 1;
+  text-align: center;
+  color: var(--color-gray-900);
+  border-radius: var(--radius-circle);
+  background-color: var(--color-blue-50);
+  @include typography("label", "01-m");
+}

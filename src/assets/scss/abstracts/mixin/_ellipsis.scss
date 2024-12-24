@@ -1,0 +1,12 @@
+@mixin ellipsis($line: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+}
+
+// example usage
+// .example {
+//   @include ellipsis(2);
+// }

@@ -1,0 +1,200 @@
+@use "sass:math";
+@use "sass:map";
+@use "sass:meta";
+
+/*----------------------
+  Typography Maps & Functions
+----------------------*/
+$typography-styles: (
+  "heading": (
+    "04": (
+      size: 1.75rem,
+      // 28px
+      weight: 700,
+      height: 140%,
+      spacing: -0.084px,
+      // 28 * -0.003
+    ),
+    "03": (
+      size: 1.5rem,
+      // 24px
+      weight: 700,
+      height: 140%,
+      spacing: -0.072px,
+      // 24 * -0.003
+    ),
+    "02": (
+      size: 1.375rem,
+      // 22px
+      weight: 500,
+      height: 140%,
+      spacing: -0.066px,
+      // 22 * -0.003
+    ),
+    "01": (
+      size: 1.25rem,
+      // 20px
+      weight: 700,
+      height: 140%,
+      spacing: -0.06px,
+      // 20 * -0.003
+    ),
+  ),
+  "title": (
+    "01-b": (
+      size: 1.125rem,
+      // 18px
+      weight: 700,
+      height: 140%,
+      spacing: -0.054px,
+      // 18 * -0.003
+    ),
+    "01-m": (
+      size: 1.125rem,
+      // 18px
+      weight: 500,
+      height: 140%,
+      spacing: -0.054px,
+    ),
+  ),
+  "body": (
+    "02-b": (
+      size: 1rem,
+      // 16px
+      weight: 700,
+      height: 150%,
+      spacing: -0.048px,
+      // 16 * -0.003
+    ),
+    "02-m": (
+      size: 1rem,
+      // 16px
+      weight: 500,
+      height: 150%,
+      spacing: -0.048px,
+    ),
+    "01-b": (
+      size: 0.9375rem,
+      // 15px
+      weight: 700,
+      height: 150%,
+      spacing: -0.045px,
+      // 15 * -0.003
+    ),
+    "01-m": (
+      size: 0.9375rem,
+      // 15px
+      weight: 500,
+      height: 150%,
+      spacing: -0.045px,
+    ),
+  ),
+  "label": (
+    "01-b": (
+      size: 0.875rem,
+      // 14px
+      weight: 700,
+      height: 150%,
+      spacing: -0.042px,
+      // 14 * -0.003
+    ),
+    "01-m": (
+      size: 0.875rem,
+      // 14px
+      weight: 500,
+      height: 150%,
+      spacing: -0.042px,
+    ),
+  ),
+  "caption": (
+    "02-b": (
+      size: 0.8125rem,
+      // 13px
+      weight: 700,
+      height: 150%,
+      spacing: -0.039px,
+      // 13 * -0.003
+    ),
+    "02-m": (
+      size: 0.8125rem,
+      // 13px
+      weight: 500,
+      height: 150%,
+      spacing: -0.039px,
+    ),
+    "01-b": (
+      size: 0.75rem,
+      // 12px
+      weight: 700,
+      height: 150%,
+      spacing: -0.036px,
+      // 12 * -0.003
+    ),
+    "01-m": (
+      size: 0.75rem,
+      // 12px
+      weight: 500,
+      height: 150%,
+      spacing: -0.036px,
+    ),
+  ),
+);
+
+// 단위 제거 함수 - 이미 수정되어 있음
+@function strip-unit($number) {
+  @if meta.type-of($number) == "number" and not math.is-unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+// 통합된 typography 믹스인 수정
+@mixin typography($type, $variant) {
+  @if map.has-key($typography-styles, $type) {
+    $type-styles: map.get($typography-styles, $type);
+
+    @if map.has-key($type-styles, $variant) {
+      $style: map.get($type-styles, $variant);
+
+      // 직접 값 사용
+      font-size: map.get($style, size);
+      font-weight: map.get($style, weight);
+      line-height: map.get($style, height);
+      letter-spacing: map.get($style, spacing);
+    }
+  }
+}
+
+// CSS Variables 및 클래스 자동 생성 수정
+@each $type, $variants in $typography-styles {
+  // CSS Variables 생성
+  :root {
+    @each $variant, $style in $variants {
+      --font-#{$type}-#{$variant}-size-rem: #{map.get($style, size)};
+      --font-#{$type}-#{$variant}-size: #{strip-unit(map.get($style, size)) * 16}px;
+      --font-#{$type}-#{$variant}-weight: #{map.get($style, weight)};
+      --font-#{$type}-#{$variant}-line-height: #{map.get($style, height)};
+      --font-#{$type}-#{$variant}-letter-spacing: #{map.get($style, spacing)};
+    }
+  }
+
+  // 클래스 생성 (변경 없음)
+  @each $variant, $style in $variants {
+    .#{$type}-#{$variant} {
+      font-size: var(--font-#{$type}-#{$variant}-size-rem);
+      font-weight: var(--font-#{$type}-#{$variant}-weight);
+      line-height: var(--font-#{$type}-#{$variant}-line-height);
+      letter-spacing: var(--font-#{$type}-#{$variant}-letter-spacing);
+    }
+  }
+}
+// example usage
+// .heading-04 클래스를 사용하여 스타일 적용
+// <h1 class="heading-04">Heading 04</h1>
+
+// .body-02-m 클래스를 사용하여 스타일 적용
+// <p class="body-02-m">Body 02 Medium</p>
+
+// mixin usage
+// @include typography("heading", "04");
+// @include typography("body", "02-m");

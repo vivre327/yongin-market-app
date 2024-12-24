@@ -1,0 +1,131 @@
+@use "../abstracts/" as *;
+/* -------------------------------------------------------------------------- */
+/*                                Bottom Sheet                                */
+/* -------------------------------------------------------------------------- */
+.bottom-sheet {
+  &-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+
+    container-type: inline-size;
+    container-name: bottom-sheet-container;
+  }
+
+  &-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+// 바텀시트 본체
+.bottom-sheet {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  transform: translate3d(0, 0, 0);
+  width: 100%;
+  background: #fff;
+  border-radius: var(--radius-4) var(--radius-4) 0 0;
+
+  // 헤더
+  &-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-inline: rem(20);
+    padding-top: rem(16);
+
+    // Header with title
+    &.with-title {
+      align-items: center;
+      justify-content: initial;
+      gap: rem(16);
+      padding-block: rem(24) rem(20);
+      text-align: center;
+      position: relative;
+
+      .title {
+        flex: 1;
+        text-align: left;
+        @include typography("title", "01-b");
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--color-gray-50);
+      }
+    }
+
+    .btn-icon {
+      color: var(--color-gray-900);
+    }
+  }
+
+  // 컨텐츠
+  &-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-block: rem(24) rem(32);
+    text-align: center;
+
+    &.with-image {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: rem(16);
+
+      &.qr {
+        padding-top: rem(16);
+
+        .pic-area {
+          width: rem(120);
+        }
+      }
+    }
+
+    .pic-area {
+      width: rem(100);
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    &.no-padding {
+      padding: 0;
+    }
+  }
+
+  // 푸터
+  &-footer {
+    padding-inline: rem(20);
+    padding-bottom: calc(16px + var(--sab));
+
+    .btn {
+      flex: 1;
+
+      @container bottom-sheet-container (width < 359px) {
+        padding-inline: rem(20);
+        font-size: rem(15);
+      }
+    }
+  }
+}

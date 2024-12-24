@@ -1,0 +1,57 @@
+@use "../abstracts/" as *;
+
+@layer Layout.Align {
+  .align {
+    display: flex;
+    &.right {
+      justify-content: flex-end;
+    }
+    &.center {
+      justify-content: center;
+    }
+    &.both {
+      justify-content: space-between;
+    }
+    &.triple {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      > :nth-child(1) {
+        justify-self: start;
+      }
+      > :nth-child(2) {
+        justify-self: center;
+      }
+      > :nth-child(3) {
+        justify-self: end;
+      }
+    }
+    &.vt {
+      align-items: flex-start;
+    }
+    &.vm {
+      align-items: center;
+    }
+    &.vb {
+      align-items: flex-end;
+    }
+  }
+
+  .text {
+    &-left {
+      text-align: left;
+    }
+    &-center {
+      text-align: center;
+    }
+    &-right {
+      text-align: right;
+    }
+  }
+
+  .mxauto {
+    width: rem(1224); // 컨테이너의 최대 너비를 1224px로 설정
+    margin-inline: auto; // 좌우 마진을 자동으로 설정하여 중앙 정렬
+  }
+  // 사용 예시: @extend .mxauto;
+}

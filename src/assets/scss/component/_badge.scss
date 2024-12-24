@@ -1,0 +1,168 @@
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts/" as *;
+
+// 뱃지 사이즈 정의
+$badgeSize: (
+  1: (
+    "className": ".base",
+    "height": 34,
+    "fontSize": 14,
+    "paddingInline": 16,
+    "borderWidth": 0,
+    "fontWeight": 700,
+  ),
+);
+
+// 뱃지 색상 정의 (기존 색상 + 아웃라인 스타일)
+$badgeColor: (
+  1: (
+    "className": ".beauty",
+    "bgColor": #fbddf3,
+    "color": #8e3374,
+    "borderColor": #8e3374,
+  ),
+  2: (
+    "className": ".fnb",
+    "bgColor": #f8e3da,
+    "color": #85462b,
+    "borderColor": #85462b,
+  ),
+  3: (
+    "className": ".food",
+    "bgColor": #ffefd2,
+    "color": #66460d,
+    "borderColor": #66460d,
+  ),
+  4: (
+    "className": ".fruit",
+    "bgColor": #f9dada,
+    "color": #7d2828,
+    "borderColor": #7d2828,
+  ),
+  5: (
+    "className": ".clothes",
+    "bgColor": #d6e0ff,
+    "color": #2952cc,
+    "borderColor": #2952cc,
+  ),
+  6: (
+    "className": ".farm",
+    "bgColor": #dcf2ea,
+    "color": #317159,
+    "borderColor": #317159,
+  ),
+  7: (
+    "className": ".etc",
+    "bgColor": var(--color-gray-50),
+    "color": var(--color-gray-600),
+    "borderColor": var(--color-gray-600),
+  ),
+);
+
+@layer Components.Badge {
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem(4);
+    height: rem(31);
+    padding-inline: rem(12);
+    box-sizing: border-box;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    @include typography("body", "01-b");
+
+    // 아이콘 스타일
+    .icon {
+      width: rem(16);
+      height: rem(16);
+      flex-shrink: 0;
+    }
+
+    &.fullsize {
+      width: 100%;
+    }
+
+    // 아웃라인 변형 스타일
+    &.outline {
+      background-color: transparent;
+      @each $index, $value in $badgeColor {
+        &#{map.get($value, "className")} {
+          color: map.get($value, "bgColor");
+          border-color: currentColor;
+        }
+      }
+    }
+
+    @for $index from 1 through list.length($badgeColor) {
+      @include badgeColor($badgeColor, $index);
+    }
+
+    @for $index from 1 through list.length($badgeSize) {
+      @include badgeSize($badgeSize, $index);
+    }
+  }
+
+  .visitor-info {
+    display: inline-flex;
+    align-items: center;
+    gap: rem(4);
+    height: rem(32);
+    padding-inline: rem(8);
+    color: var(--color-gray-900);
+    border: 1px solid var(--color-gray-100);
+    border-radius: var(--radius-pill);
+    background-color: #ffffff81;
+    @include typography("body", "02-m");
+
+    span {
+      min-width: rem(20);
+      text-align: center;
+    }
+  }
+}
+
+// Chip
+.chip-group {
+  display: flex;
+  gap: rem(4);
+  margin-bottom: rem(16);
+  container-name: chip-container;
+  container-type: inline-size;
+
+  @container chip-container (max-width: 320px) {
+    .chip {
+      padding-inline: vw(8);
+      font-size: vw(15);
+    }
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: rem(32);
+  padding-inline: rem(10);
+  color: var(--color-gray-500);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-gray-100);
+  background-color: var(--color-white);
+  transition: 0.1s ease;
+  -webkit-tap-highlight-color: transparent !important;
+  @include typography("body", "01-m");
+
+  &::before {
+    content: "#";
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+  &.active {
+    color: var(--color-white);
+    border-color: var(--color-green-500);
+    background-color: var(--color-green-500);
+  }
+}

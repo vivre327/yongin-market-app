@@ -1,0 +1,240 @@
+@use "../abstracts/" as *;
+
+@layer Components.Button {
+  // 텍스트 버튼
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem(4);
+    box-sizing: border-box;
+    cursor: pointer;
+    line-height: 1;
+    font-family: Pretendard;
+    border-radius: var(--radius-3);
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+
+    // 기본 사이즈
+    height: rem(56);
+    padding-inline: rem(24);
+    font-size: rem(16);
+    font-weight: 700;
+    border: 1px solid;
+
+    // 기본 컬러
+    background-color: var(--color-white);
+    color: var(--color-gray-400);
+    border-color: var(--color-gray-200);
+
+    // 기본 상태
+    &:disabled {
+      background-color: var(--color-gray-50);
+      color: var(--color-gray-300);
+      border-color: var(--color-gray-50);
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-green-500);
+      outline-offset: 2px;
+    }
+
+    // 버튼 타입: primary
+    &.primary {
+      background-color: var(--color-green-500);
+      color: var(--color-white);
+      border-color: var(--color-green-500);
+
+      &:active:not(:disabled) {
+        background-color: var(--color-green-600);
+        border-color: var(--color-green-600);
+      }
+
+      &[disabled] {
+        background-color: var(--color-gray-50);
+        color: var(--color-gray-300);
+        border-color: var(--color-gray-50);
+        cursor: not-allowed;
+      }
+    }
+
+    // 버튼 타입: secondary
+    &.secondary {
+      color: var(--color-green-500);
+      border-color: var(--color-gray-100);
+      background-color: var(--color-white);
+
+      &:active:not(:disabled) {
+        color: var(--color-green-600);
+        border-color: var(--color-gray-500);
+        background-color: var(--color-white);
+      }
+
+      &[disabled] {
+        color: var(--color-gray-300);
+        border-color: var(--color-gray-50);
+        background-color: var(--color-white);
+        cursor: not-allowed;
+      }
+    }
+
+    // 버튼 타입: outline
+    &.with-icon {
+      color: var(--color-gray-500);
+      border-radius: var(--radius-pill);
+      border-color: var(--color-gray-100);
+      line-height: rem(22);
+      background-color: var(--color-white);
+
+      .icon {
+        --icon-fill: var(--color-green-500);
+        --icon-stroke: var(--color-green-50);
+      }
+
+      &:active:not(:disabled) {
+        color: var(--color-gray-900);
+        border-color: var(--color-gray-900);
+        background-color: var(--color-white);
+      }
+
+      &[disabled] {
+        background-color: var(--color-white);
+        color: var(--color-gray-300);
+        border-color: var(--color-gray-100);
+        cursor: not-allowed;
+
+        .icon {
+          --icon-fill: var(--color-gray-300);
+          --icon-stroke: var(--color-gray-50);
+        }
+      }
+    }
+
+    &.stretch {
+      width: 100%;
+    }
+
+    // 버튼 타입: text
+    &.text {
+      height: auto;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      font-weight: 500;
+      line-height: rem(24);
+      color: var(--color-gray-400);
+      white-space: nowrap;
+      cursor: pointer;
+
+      .icon {
+        width: rem(20);
+        height: rem(20);
+      }
+
+      &:active:not(:disabled) {
+        color: var(--color-gray-900);
+      }
+
+      &[disabled] {
+        color: var(--color-gray-300);
+        background-color: transparent;
+        border: none;
+        cursor: not-allowed;
+      }
+
+      &.sm {
+        font-size: rem(14);
+      }
+
+      &.md {
+        font-size: rem(16);
+      }
+    }
+  }
+
+  // 버튼 타입: icon
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(24);
+    height: rem(24);
+    color: var(--color-gray-900);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    svg,
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
+
+    &:active:not(:disabled) {
+      .icon {
+        transform: scale(0.95);
+      }
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+
+      .icon {
+        color: var(--color-gray-300);
+      }
+    }
+
+    &.x-sm {
+      width: rem(16);
+      height: rem(16);
+    }
+
+    &.sm {
+      width: rem(20);
+      height: rem(20);
+    }
+
+    &.md {
+      width: rem(24);
+      height: rem(24);
+    }
+
+    &.lg {
+      width: rem(32);
+      height: rem(32);
+    }
+
+    &.x-lg {
+      width: rem(40);
+      height: rem(40);
+    }
+
+    &.primary {
+      color: var(--color-green-500);
+    }
+
+    &.gray {
+      color: var(--color-gray-300);
+    }
+
+    &.orange {
+      color: var(--color-orange-500);
+    }
+  }
+
+  .btn-text {
+    color: var(--color-gray-400);
+    @include typography("label", "01-m");
+  }
+
+  // 버튼 그룹
+  .btn-area {
+    display: flex;
+    gap: rem(8);
+    flex-wrap: wrap;
+
+    > * {
+      flex: 1 1 auto;
+    }
+  }
+}

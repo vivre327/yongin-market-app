@@ -1,0 +1,43 @@
+@use "../abstracts/" as *;
+
+$mt: (0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64);
+$mr: (0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64);
+$mb: (0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64);
+$ml: (0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64);
+
+@layer Layout.Space {
+  @each $margin in $mt {
+    .mt#{$margin} {
+      margin-top: rem($margin);
+    }
+  }
+  @each $margin in $mr {
+    .mr#{$margin} {
+      margin-right: rem($margin);
+    }
+  }
+  @each $margin in $mb {
+    .mb#{$margin} {
+      margin-bottom: rem($margin);
+    }
+  }
+  @each $margin in $ml {
+    .ml#{$margin} {
+      margin-left: rem($margin);
+    }
+  }
+}
+
+// Example of generated classes
+// .mt0 {
+//   margin-top: 0rem;
+// }
+// .mr4 {
+//   margin-right: 0.25rem;
+// }
+// .mb8 {
+//   margin-bottom: 0.5rem;
+// }
+// .ml4 {
+//   margin-left: 0.25rem;
+// }

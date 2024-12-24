@@ -1,0 +1,81 @@
+@use "../abstracts/" as *;
+@use "../layout/align" as *;
+
+@layer Layout.Header {
+  .header {
+    anchor-name: --header;
+    // position: sticky;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // width: 100%;
+    // max-width: 100%;
+    // z-index: 10;
+    padding-top: var(--sat);
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    background: transparent;
+
+    &-inner {
+      background-color: var(--color-white);
+      // background: #ffffffe0;
+      // backdrop-filter: blur(5px);
+      // -webkit-backdrop-filter: blur(18px);
+      padding: rem(8) rem(20);
+      padding-top: calc(var(--sat) + rem(8));
+      @extend .align;
+      @extend .both;
+      @extend .vm;
+    }
+
+    .logo {
+      width: rem(125);
+    }
+  }
+
+  .sub-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    width: 100%;
+    max-width: 100%;
+    padding-top: var(--sat);
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    background: transparent;
+
+    &-inner {
+      background: var(--color-white);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: rem(32) rem(20) rem(24);
+      gap: rem(12);
+      @extend .align;
+      @extend .both;
+      @extend .vm;
+
+      &:not(.is-detail) {
+        .title {
+          @include typography("heading", "03");
+        }
+      }
+
+      &.is-detail {
+        padding-block: rem(24);
+
+        .title {
+          margin-right: auto;
+          @include typography("title", "01-b");
+        }
+      }
+
+      &.is-only {
+        padding-block: rem(20);
+      }
+    }
+  }
+}

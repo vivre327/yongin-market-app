@@ -1,0 +1,60 @@
+@use "../abstracts/" as *;
+
+@layer Layout.Base {
+  html {
+    height: 100%;
+    // overflow-x: hidden;
+  }
+
+  body {
+    height: 100%;
+    background-color: var(--color-white);
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  main {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; // iOS 스크롤 부드럽게
+  }
+
+  .Layout {
+    anchor-name: --layout;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    // min-height: 100dvh;
+    min-height: 100%;
+  }
+
+  .container {
+    padding-top: rem(24);
+  }
+
+  .thumb {
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  // .Layout {
+  //   display: flex;
+  //   flex-direction: column;
+  //   flex: 1;
+  // }
+}

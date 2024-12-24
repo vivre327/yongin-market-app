@@ -1,0 +1,147 @@
+@use "sass:map";
+@use "sass:meta";
+
+// 색상 변수 맵 정의
+$colors: (
+  "black": var(--color-black),
+  "white": var(--color-white),
+  "gray": (
+    "900": var(--color-gray-900),
+    "800": var(--color-gray-800),
+    "700": var(--color-gray-700),
+    "600": var(--color-gray-600),
+    "500": var(--color-gray-500),
+    "400": var(--color-gray-400),
+    "300": var(--color-gray-300),
+    "200": var(--color-gray-200),
+    "100": var(--color-gray-100),
+    "50": var(--color-gray-50),
+  ),
+  "blue": (
+    "900": var(--color-blue-900),
+    "800": var(--color-blue-800),
+    "700": var(--color-blue-700),
+    "600": var(--color-blue-600),
+    "500": var(--color-blue-500),
+    "400": var(--color-blue-400),
+    "300": var(--color-blue-300),
+    "200": var(--color-blue-200),
+    "100": var(--color-blue-100),
+    "50": var(--color-blue-50),
+  ),
+  "green": (
+    "900": var(--color-green-900),
+    "800": var(--color-green-800),
+    "700": var(--color-green-700),
+    "600": var(--color-green-600),
+    "500": var(--color-green-500),
+    "400": var(--color-green-400),
+    "300": var(--color-green-300),
+    "200": var(--color-green-200),
+    "100": var(--color-green-100),
+    "50": var(--color-green-50),
+  ),
+  "orange": (
+    "900": var(--color-orange-900),
+    "800": var(--color-orange-800),
+    "700": var(--color-orange-700),
+    "600": var(--color-orange-600),
+    "500": var(--color-orange-500),
+    "400": var(--color-orange-400),
+    "300": var(--color-orange-300),
+    "200": var(--color-orange-200),
+    "100": var(--color-orange-100),
+    "50": var(--color-orange-50),
+  ),
+);
+
+// 배경색 변수 맵
+$bg-colors: (
+  "white": var(--color-bg-white),
+  "light-blue": var(--color-bg-light-blue),
+  "gray": var(--color-bg-gray),
+);
+
+// 상태색 변수 맵
+$status-colors: (
+  "red": var(--color-status-red),
+  "orange": var(--color-status-orange),
+  "green": var(--color-status-green),
+  "blue": var(--color-status-blue),
+);
+
+// 컬러 클래스 생성 믹스인
+@mixin generate-color-classes {
+  // 기본 컬러
+  @each $name, $value in $colors {
+    @if meta.type-of($value) == map {
+      @each $shade, $color in $value {
+        // 텍스트 컬러
+        .#{$name}-#{$shade} {
+          color: $color;
+        }
+        // 배경 컬러
+        .bg-#{$name}-#{$shade} {
+          background-color: $color;
+        }
+      }
+    } @else {
+      // black, white 등 단일 컬러
+      .#{$name} {
+        color: $value;
+      }
+      .bg-#{$name} {
+        background-color: $value;
+      }
+    }
+  }
+
+  // 배경색
+  @each $name, $value in $bg-colors {
+    .bg-#{$name} {
+      background-color: $value;
+    }
+  }
+
+  // 상태색
+  @each $name, $value in $status-colors {
+    .status-#{$name} {
+      color: $value;
+    }
+    .bg-status-#{$name} {
+      background-color: $value;
+    }
+  }
+}
+
+// 믹스인 실행
+@include generate-color-classes;
+
+/* 사용 예시:
+텍스트 컬러:
+.black
+.white
+.gray-900
+.blue-500
+.green-400
+.orange-300
+
+배경 컬러:
+.bg-black
+.bg-white
+.bg-gray-100
+.bg-blue-500
+.bg-green-400
+.bg-orange-300
+
+배경 특수 컬러:
+.bg-white
+.bg-light-blue
+.bg-gray
+
+상태 컬러:
+.status-red
+.status-green
+.bg-status-red
+.bg-status-green
+*/

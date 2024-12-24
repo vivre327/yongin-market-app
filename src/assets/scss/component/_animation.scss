@@ -1,0 +1,354 @@
+.modal {
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  transition: all 0.3s ease;
+}
+/*----------------------
+  Zoom Reverse Transition
+----------------------*/
+.zoom-reverse-enter-from {
+  opacity: 0;
+}
+
+.zoom-reverse-leave-to {
+  opacity: 0;
+}
+
+.zoom-reverse-enter-from .modal-content,
+.zoom-reverse-leave-to .modal-content {
+  -webkit-transform: scale(1.1); /* 등장 시 축소 */
+  transform: scale(1.1);
+}
+/*----------------------
+  Zoom Transition
+----------------------*/
+/* Zoom Transition (등장 시 확대, 퇴장 시 축소) */
+.zoom-enter-active,
+.zoom-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* 퇴장 시 더 빠르게 사라지게 조정 */
+.zoom-leave-active {
+  transition: opacity 0.1s ease; /* 퇴장 속도를 0.15s로 설정 */
+}
+.zoom-leave-active .modal-content {
+  transition: transform 0.5s ease; /* 퇴장 속도를 0.15s로 설정 */
+}
+
+.zoom-enter-from {
+  opacity: 0;
+}
+
+.zoom-leave-to {
+  opacity: 0;
+}
+
+.zoom-enter-from .modal-content,
+.zoom-leave-to .modal-content {
+  -webkit-transform: scale(0.8); /* 등장 시 확대 */
+  transform: scale(0.8);
+}
+
+.zoom-enter-to .modal-content,
+.zoom-leave-from .modal-content {
+  -webkit-transform: scale(1); /* 원래 크기로 돌아옴 */
+  transform: scale(1);
+}
+
+/*----------------------
+  Fade Transition
+----------------------*/
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+/*----------------------
+  아코디언
+----------------------*/
+/* 진입 */
+.accordion-enter-from {
+  opacity: 0;
+  transform: scaleY(0);
+}
+.accordion-enter-active {
+  transition: opacity 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0.05s, transform 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+  transform-origin: top;
+}
+.accordion-enter-to {
+  opacity: 1;
+  transform: scaleY(1);
+}
+// 진입 종료되면 진입 시작 스타일 삭제됨
+
+/* 진출: 진출 트리거 되면 시작됨 */
+.accordion-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.accordion-leave-active {
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.2s cubic-bezier(0.2, 0.1, 0.25, 1);
+  transform-origin: top;
+}
+.accordion-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+// 완료되면 삭제된다.
+
+/*----------------------
+  Context Zoom
+----------------------*/
+/* 진입 */
+.zoom-context-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.zoom-context-enter-active {
+  transition: opacity 0.2s cubic-bezier(0.42, 0, 0.58, 1) 0.05s, transform 0.25s cubic-bezier(0.42, 0, 0.58, 1);
+}
+.zoom-context-enter-to {
+  opacity: 1;
+  transform: translateY(1);
+}
+// 진입 종료되면 진입 시작 스타일 삭제됨
+
+/* 진출: 진출 트리거 되면 시작됨 */
+.zoom-context-leave-from {
+  opacity: 1;
+  transform: translateY(1);
+}
+.zoom-context-leave-active {
+  transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.1s cubic-bezier(0.2, 0.1, 0.25, 1);
+}
+.zoom-context-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+// 완료되면 삭제된다.
+
+/*----------------------
+  Context Zoom (Bottom to Top)
+----------------------*/
+/* 진입 */
+.accordion-top-enter-from {
+  opacity: 0;
+  transform: translateY(10px); /* 시작 위치를 아래쪽으로 설정 */
+}
+.accordion-top-enter-active {
+  transition: opacity 0.2s cubic-bezier(0.42, 0, 0.58, 1) 0.05s, transform 0.25s cubic-bezier(0.42, 0, 0.58, 1);
+}
+.accordion-top-enter-to {
+  opacity: 1;
+  transform: translateY(0); /* 최종 위치는 원래 위치 */
+}
+
+/* 진출 */
+.accordion-top-leave-from {
+  opacity: 1;
+  transform: translateY(0); /* 원래 위치에서 시작 */
+}
+.accordion-top-leave-active {
+  transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.1s cubic-bezier(0.2, 0.1, 0.25, 1);
+}
+.accordion-top-leave-to {
+  opacity: 0;
+  transform: translateY(10px); /* 아래로 사라지도록 설정 */
+}
+
+/*----------------------
+  Fade Up
+----------------------*/
+/* 진입 */
+.fade-up-enter-from,
+.fade-up-leave-to {
+  opacity: 0;
+}
+.fade-up-enter-from .modal-content,
+.fade-up-leave-to .modal-content {
+  transform: translateY(8px);
+}
+.fade-up-enter-to,
+.fade-up-leave-from {
+  opacity: 1;
+}
+.fade-up-enter-to .modal-content,
+.fade-up-leave-from .modal-content {
+  transform: translateY(0);
+}
+// 진입
+.fade-up-enter-active {
+  transition: opacity 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+}
+.fade-up-enter-active .modal-content {
+  transition: transform 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+}
+// 진출
+.fade-up-leave-active {
+  transition: opacity 0.2s cubic-bezier(0.2, 0.1, 0.25, 1);
+}
+.fade-up-leave-active .modal-content {
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+// 완료되면 삭제된다.
+
+/*----------------------
+  Toast
+----------------------*/
+/* Toast 공통 애니메이션 */
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(var(--toast-initial-offset)); /* Top,Bottom 토스트 초기값을 변수로  */
+}
+
+.toast-enter-active {
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+.toast-leave-active {
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+.toast-enter-to,
+.toast-leave-from {
+  opacity: 1;
+  transform: translateY(0); /* 종료 위치는 동일하게 */
+}
+
+/* 상단에 나타나는 토스트 */
+.toast-container.top {
+  --toast-initial-offset: -20px;
+}
+
+/* 하단에 나타나는 토스트 */
+.toast-container.bottom {
+  --toast-initial-offset: 20px;
+}
+
+/* 상단에 나타나는 알럿 */
+.alert-container.top {
+  --toast-initial-offset: -20px;
+}
+
+/*----------------------
+  Alert
+----------------------*/
+/* alert 공통 애니메이션 */
+.alert-enter-from,
+.alert-leave-to {
+  opacity: 0;
+  margin-top: -3rem;
+}
+
+/* 등장 */
+.alert-enter-active {
+  transition: opacity 0.3s ease-out, margin-top 0.3s ease-out;
+  margin-top: 0;
+}
+
+/* 퇴장 */
+.alert-leave-active {
+  transition: opacity 0.2s ease-out, margin-top 0.25s ease-out 0.1s;
+  margin-top: -4rem;
+}
+
+.alert-enter-to,
+.alert-leave-from {
+  opacity: 1;
+  margin-top: 0;
+}
+
+/*----------------------
+  Alert Next Sibling
+----------------------*/
+/* 형제 요소 튕겨 올라오는 애니메이션 */
+/* 형제 요소 튕겨 올라오는 애니메이션 */
+// @keyframes bounce {
+//   0% {
+//     transform: translateY(0);
+//   }
+//   50% {
+//     transform: translateY(-10px);
+//   }
+//   100% {
+//     transform: translateY(0);
+//   }
+// }
+
+// .sibling-bounce {
+//   transition: 0.2s;
+//   &.active {
+//     animation: bounce 1s ease-in-out;
+//     // animation-delay: 0.3s;
+//   }
+// }
+.sibling-bounce {
+  transition: all 0.3s ease-in-out;
+  transform: translateY(0);
+  opacity: 1;
+}
+.sibling-bounce.active {
+  transform: translateY(-1rem);
+}
+/*----------------------
+  Toast Zoom
+----------------------*/
+
+/* 진입 애니메이션 */
+.toast-zoom-enter-from {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95); /* 슬라이드 + 약간의 스케일 효과 */
+}
+.toast-zoom-enter-active {
+  transition: opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.25, 0.8, 0.5, 1); /* 부드러운 커브 */
+}
+.toast-zoom-enter-to {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 진출 애니메이션 */
+.toast-zoom-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast-zoom-leave-active {
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+.toast-zoom-leave-to {
+  opacity: 0;
+  transform: translateY(20px); /* 진출할 때도 같은 위치로 이동 */
+}
+
+/*----------------------
+  Bottom Sheet
+----------------------*/
+// 애니메이션
+.bottom-sheet-enter-active,
+.bottom-sheet-leave-active {
+  transition: opacity 0.3s ease;
+
+  .bottom-sheet {
+    transition: transform 0.3s ease;
+  }
+}
+
+.bottom-sheet-enter-from,
+.bottom-sheet-leave-to {
+  opacity: 0;
+
+  .bottom-sheet {
+    transform: translateY(100%);
+  }
+}
